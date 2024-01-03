@@ -1,15 +1,44 @@
 let Assignment = require('../model/assignment');
 
 // Récupérer tous les assignments (GET)
-function getAssignments(req, res){
-    Assignment.find((err, assignments) => {
-        if(err){
-            res.send(err)
-        }
+// function getAssignments(req, res){
+//     Assignment.find((err, assignments) => {
+//         if(err){
+//             res.send(err)
+//         }
 
-        res.send(assignments);
-    });
-}
+//         res.send(assignments);
+//     });
+// }
+function getAssignments(req, res) {
+    var aggregateQuery = Assignment.aggregate();
+    Assignment.aggregatePaginate(aggregateQuery,
+      {
+        page: parseInt(req.query.page) || 1,
+        limit: parseInt(req.query.limit) || 10,
+      },
+      (err, result) => {
+        if (err) {
+          res.send(err);
+          return;
+        }
+        // Formatez la réponse ici avant de l'envoyer
+        res.send({
+          docs: result.docs,
+          totalDocs: result.totalDocs,
+          limit: result.limit,
+          totalPages: result.totalPages,
+          page: result.page,
+          pagingCounter: result.pagingCounter,
+          hasPrevPage: result.hasPrevPage,
+          hasNextPage: result.hasNextPage,
+          prevPage: result.prevPage,
+          nextPage: result.nextPage
+        });
+      }
+    );
+   }
+   
 
 // Récupérer un assignment par son id (GET)
 function getAssignment(req, res){

@@ -1,4 +1,7 @@
 let mongoose = require('mongoose');
+
+//Pagination
+var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 let Schema = mongoose.Schema;
 
 let AssignmentSchema = Schema({
@@ -7,6 +10,10 @@ let AssignmentSchema = Schema({
     nom: String,
     rendu: Boolean
 });
+//Pagination
+AssignmentSchema.plugin(aggregatePaginate);
+
+// Récupérer tous les assignments (GET)
 
 // C'est à travers ce modèle Mongoose qu'on pourra faire le CRUD
 //remplacer Assignment = assignments (ils vont marcher)
@@ -14,3 +21,5 @@ let AssignmentSchema = Schema({
 //Mongoose fait du "matching" et prend la collection dont le nom 
 // est le plus proche
 module.exports = mongoose.model('assignments', AssignmentSchema);
+
+
