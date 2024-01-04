@@ -1,15 +1,6 @@
 let Assignment = require('../model/assignment');
 
 // Récupérer tous les assignments (GET)
-// function getAssignments(req, res){
-//     Assignment.find((err, assignments) => {
-//         if(err){
-//             res.send(err)
-//         }
-
-//         res.send(assignments);
-//     });
-// }
 function getAssignments(req, res) {
     var aggregateQuery = Assignment.aggregate();
     Assignment.aggregatePaginate(aggregateQuery,
@@ -57,6 +48,13 @@ function postAssignment(req, res){
     assignment.nom = req.body.nom;
     assignment.dateDeRendu = req.body.dateDeRendu;
     assignment.rendu = req.body.rendu;
+    assignment.auteur= req.body.auteur;
+    assignment.nomMatiere= req.body.nomMatiere;
+    assignment.photoMatiere = req.body.photoMatiere;
+    assignment.photoProf= req.body.photoProf;
+    assignment.note= req.body.note;
+    assignment.remarques= req.body.remarques;
+
 
     console.log("POST assignment reçu :");
     console.log(assignment)
