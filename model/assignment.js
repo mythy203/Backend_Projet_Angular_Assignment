@@ -17,6 +17,7 @@ let AssignmentSchema = Schema({
     photoMatiere: String,
     photoProf: String
 });
+
 //Pagination
 AssignmentSchema.plugin(aggregatePaginate);
 
@@ -27,6 +28,11 @@ AssignmentSchema.plugin(aggregatePaginate);
 // le premier pararramètres est le nom de la collection. Notez que 
 //Mongoose fait du "matching" et prend la collection dont le nom 
 // est le plus proche
+// Créer les modèles
+const Assignment = mongoose.model('Assignment', AssignmentSchema);
+
+// Exporter les modèles
+// module.exports = { Assignment };
 module.exports = mongoose.model('assignments', AssignmentSchema);
 
 
