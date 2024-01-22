@@ -3,8 +3,10 @@ let app = express();
 let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
 const userRoutes = require('./routes/users');
-
+let matiere = require('./routes/matieres')
+const matiereRoutes =require('./routes/matieres')
 let mongoose = require('mongoose');
+const { Matiere } = require('./model/matiere');
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
 
@@ -60,6 +62,9 @@ app.route(prefix + '/assignments')
 //   .post(user.postUser)
 //   .get(user.getUsers);
 app.use(prefix + '/users', userRoutes);
+
+
+app.use(prefix + '/matieres', matiereRoutes);
 
 
 // On démarre le serveur
