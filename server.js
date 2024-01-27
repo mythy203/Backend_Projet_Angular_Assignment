@@ -66,6 +66,38 @@ app.use(prefix + '/users', userRoutes);
 
 app.use(prefix + '/matieres', matiereRoutes);
 
+// app.post('/api/login', (req, res) => {
+//   // ... (verify user)
+//   const token = jwt.sign(
+//       { 
+//           username: user.username,
+//           role: user.role  // Thêm role vào đây
+//       },
+//       process.env.JWT_SECRET, 
+//       { expiresIn: '24h' }
+//   );
+//   res.json({ token });
+// });
+
+// const jwt = require('jsonwebtoken');
+
+// function authenticateToken(req, res, next) {
+//   const authHeader = req.headers['authorization'];
+//   const token = authHeader && authHeader.split(' ')[1];
+
+//   if (token == null) return res.sendStatus(401);
+
+//   jwt.verify(token, 'SECRET_KEY', (err, user) => {
+//     if (err) return res.sendStatus(403);
+//     req.user = user;
+//     next();
+//   });
+// }
+
+// // Utiliser ce middleware dans vos routes protégées
+// app.get('/protected', authenticateToken, (req, res) => {
+//   res.json({ message: "Protected content" });
+// });
 
 
 // On démarre le serveur
